@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
-    $('.result-box').hide();
-    $('.final-result-box').hide();
-
+    //An array containing all question objects:
     var questions = [
         {
             question: 'What number is three?',
@@ -27,6 +25,7 @@ $(document).ready(function () {
         }
     ];
 
+    //Global variables:
     var intervalID, timeoutID;
     var timeLimit = 10;
 
@@ -123,6 +122,7 @@ $(document).ready(function () {
         }, 1000);
     }
 
+    //This method displays the next question or, if there are no more questions, the final result:
     Quiz.prototype.toNext = function() {
         var that = this;
         timeoutID = setTimeout(function () {
@@ -136,31 +136,41 @@ $(document).ready(function () {
         }, 5000);
     }
 
+    //This method wraps three cooccuring methods together for DRYness.
     Quiz.prototype.newGame = function() {
         this.setQuestion(0);
         this.displayQuestion();
         this.startTimer();
     }
 
-
     /************************** The core loop begins below:***********************/
 
+    //First, initialize a new Quiz object:
     var quiz = new Quiz;
+
+    //Set a new game to begin:
     quiz.newGame();
 
+    //If an answer is clicked:
     $('.answers').on('click', '.answer', function () {
+        //Stop the timer:
         clearInterval(intervalID);
+        //If it's the correct answer:
         if ($(this).attr('data-is-correct') === 'true') {
+            //Tell the user, increment correctGuesses, and move on.
             quiz.displayResult('You got it!');
             quiz.correctGuesses++;
             quiz.toNext();
+        //If it's not:
         } else {
+            //Tell the user, increment incorrectGuesses, and move on.
             quiz.displayResult('Not quite...');
             quiz.incorrectGuesses++;
             quiz.toNext();
         }
     });
 
+    //The restart button begins the quiz anew:
     $('#restart').on('click', function() {
         quiz = new Quiz;
         quiz.newGame();
