@@ -1,0 +1,17 @@
+|*******************************************************************************************************|
+|                                                                                                       |
+|                                           Trivia Game!                                                |
+|                                                                                                       |
+|*******************************************************************************************************|
+
+-On page load:
+    -For each question:
+        -Set interval counting down from 30.
+        -If an answer is clicked:
+            -Display correct answer, :) or :(
+            -If there are no more questions:
+                -Go to summary screen
+        -Else if interval hits 0:
+            -Display timeout
+            -If there are no more questions:
+                -Go to summary screen
