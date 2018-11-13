@@ -102,17 +102,30 @@ $(document).ready(function () {
         $('#timer').text(this.timeLeft);
     }
 
-    Quiz.prototype.startTimer = function() {
+    Quiz.prototype.startTimer = function () {
         var that = this;
-        intervalID = setInterval(function() {
+        intervalID = setInterval(function () {
             that.countDown();
-            if(that.timeLeft <= 0) {
+            if (that.timeLeft <= 0) {
                 clearInterval(intervalID);
                 that.displayResult("Time's up...");
                 that.timeLeft = 10;
                 that.skippedGuesses++;
             }
         }, 1000);
+    }
+
+    Quiz.prototype.toNext = function() {
+        var that = this;
+        timeoutID = setTimeout(function () {
+            if(that.nextIndex === that.questionBank.length) {
+                that.displayFinalResult();
+            } else {
+                that.setQuestion(that.nextIndex);
+                that.displayQuestion();
+                that.startTimer();
+            }
+        }, 5000);
     }
 
 
@@ -129,27 +142,11 @@ $(document).ready(function () {
         if ($(this).attr('data-is-correct') === 'true') {
             quiz.displayResult('You got it!');
             quiz.correctGuesses++;
-            timeoutID = setTimeout(function () {
-                if (quiz.nextIndex === quiz.questionBank.length) {
-                    quiz.displayFinalResult();
-                } else {
-                    quiz.setQuestion(quiz.nextIndex);
-                    quiz.displayQuestion();
-                    quiz.startTimer();
-                }
-            }, 5000);
+            quiz.toNext();
         } else {
             quiz.displayResult('Not quite...');
             quiz.incorrectGuesses++;
-            timeoutID = setTimeout(function () {
-                if (quiz.nextIndex === quiz.questionBank.length) {
-                    quiz.displayFinalResult();
-                } else {
-                    quiz.setQuestion(quiz.nextIndex);
-                    quiz.displayQuestion();
-                    quiz.startTimer();
-                }
-            }, 5000);
+            quiz.toNext();
         }
     });
 
