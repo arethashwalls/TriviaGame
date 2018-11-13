@@ -103,7 +103,16 @@ $(document).ready(function () {
     }
 
     Quiz.prototype.startTimer = function() {
-        intervalID = setInterval(function() {}, 1000);
+        var that = this;
+        intervalID = setInterval(function() {
+            that.countDown();
+            if(that.timeLeft <= 0) {
+                clearInterval(intervalID);
+                that.displayResult("Time's up...");
+                that.timeLeft = 10;
+                that.skippedGuesses++;
+            }
+        }, 1000);
     }
 
 
@@ -113,14 +122,7 @@ $(document).ready(function () {
 
     quiz.setQuestion(0);
     quiz.displayQuestion();
-
-    intervalID = setInterval(function () {
-        quiz.countDown();        
-        if (quiz.timeLeft <= 0) {
-            quiz.displayResult("Time's up...")
-            quiz.skippedGuesses++;
-        }
-    }, 1000);
+    quiz.startTimer();
 
     $('.answers').on('click', '.answer', function () {
         clearInterval(intervalID);
@@ -133,6 +135,7 @@ $(document).ready(function () {
                 } else {
                     quiz.setQuestion(quiz.nextIndex);
                     quiz.displayQuestion();
+                    quiz.startTimer();
                 }
             }, 5000);
         } else {
@@ -144,6 +147,7 @@ $(document).ready(function () {
                 } else {
                     quiz.setQuestion(quiz.nextIndex);
                     quiz.displayQuestion();
+                    quiz.startTimer();
                 }
             }, 5000);
         }
