@@ -28,6 +28,7 @@ $(document).ready(function () {
     ];
 
     var intervalID, timeoutID;
+    var timeLimit = 10;
 
     //This helper function takes an array and returns a new array with the same contents in a randomized order:
     function randomize(arr) {
@@ -42,7 +43,7 @@ $(document).ready(function () {
     //This constructor defines the Quiz prototype:
     function Quiz() {
         this.questionBank = $.extend(true, [], questions);
-        this.timeLeft = 10;
+        this.timeLeft = timeLimit;
         this.currentGuess = '';
         this.correctGuesses = 0;
         this.incorrectGuesses = 0;
@@ -68,6 +69,7 @@ $(document).ready(function () {
         $('.question-box').show();
         $('.timer-box').show();
         $('.result-box').hide();
+        $('.final-result-box').hide();
         $('.question').text(this.currentQuestion.question);
         $('.answers').empty();
         for (let i = 0; i < this.allAnswers.length; i++) {
@@ -89,6 +91,7 @@ $(document).ready(function () {
         $('#correct').text(this.correctAnswer);
     }
 
+    //This method updates the DOM to show the final result:
     Quiz.prototype.displayFinalResult = function () {
         $('.result-box').hide();
         $('.final-result-box').show();
@@ -97,20 +100,25 @@ $(document).ready(function () {
         $('#total-skipped').text(this.skippedGuesses);
     }
 
+    //This method contains the countdown that will be used in the interval later:
     Quiz.prototype.countDown = function () {
         this.timeLeft--;
         $('#timer').text(this.timeLeft);
+        
     }
 
+    //This method begins the countdown and 
     Quiz.prototype.startTimer = function () {
+        this.timeLeft = timeLimit;
+        $('#timer').text(this.timeLeft);
         var that = this;
         intervalID = setInterval(function () {
             that.countDown();
-            if (that.timeLeft <= 0) {
+            if (that.timeLeft < 0) {
                 clearInterval(intervalID);
                 that.displayResult("Time's up...");
-                that.timeLeft = 10;
                 that.skippedGuesses++;
+                that.toNext();
             }
         }, 1000);
     }
@@ -128,14 +136,17 @@ $(document).ready(function () {
         }, 5000);
     }
 
+    Quiz.prototype.newGame = function() {
+        this.setQuestion(0);
+        this.displayQuestion();
+        this.startTimer();
+    }
+
 
     /************************** The core loop begins below:***********************/
 
     var quiz = new Quiz;
-
-    quiz.setQuestion(0);
-    quiz.displayQuestion();
-    quiz.startTimer();
+    quiz.newGame();
 
     $('.answers').on('click', '.answer', function () {
         clearInterval(intervalID);
@@ -148,6 +159,11 @@ $(document).ready(function () {
             quiz.incorrectGuesses++;
             quiz.toNext();
         }
+    });
+
+    $('#restart').on('click', function() {
+        quiz = new Quiz;
+        quiz.newGame();
     });
 
 });
