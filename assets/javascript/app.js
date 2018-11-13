@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     $('.result-box').hide();
+    $('.final-result-box').hide();
 
     var questions = [
         {
@@ -12,16 +13,16 @@ $(document).ready(function () {
         },
         {
             question: 'What number is five?',
-            trueAnswer: '3',
-            decoy1: '5',
+            trueAnswer: '5',
+            decoy1: '3',
             decoy2: '9',
             decoy3: '9000'
         },
         {
             question: 'What number is nine?',
-            trueAnswer: '3',
+            trueAnswer: '9',
             decoy1: '5',
-            decoy2: '9',
+            decoy2: '3',
             decoy3: '9000'
         }
     ];
@@ -51,6 +52,8 @@ $(document).ready(function () {
     //This method sets the current question and answers based on the index provided:
     Quiz.prototype.setQuestion = function (index) {
         this.currentQuestion = this.questionBank[index];
+        console.log(this.currentQuestion)
+        this.nextIndex = index + 1;
         this.allAnswers = randomize([
             this.currentQuestion.trueAnswer,
             this.currentQuestion.decoy1,
@@ -66,11 +69,12 @@ $(document).ready(function () {
         $('.timer-box').show();
         $('.result-box').hide();
         $('.question').text(this.currentQuestion.question);
+        $('.answers').empty();
         for (let i = 0; i < this.allAnswers.length; i++) {
             // var $answer = $('<li>').text(this.allAnswers[i]).attr('id', ('answer-' + i));
             var $answer = $('<li>').text(this.allAnswers[i]).attr({
-                'data-is-correct' : (this.allAnswers[i] === this.correctAnswer ? true : false),
-                'class' : 'answer'
+                'data-is-correct': (this.allAnswers[i] === this.correctAnswer ? true : false),
+                'class': 'answer'
             });
             $('.answers').append($answer);
         }
@@ -81,13 +85,25 @@ $(document).ready(function () {
         $('.question-box').hide();
         $('.timer-box').hide();
         $('.result-box').show();
-        $('.result').text(str);
-        $('.correct').text(this.correctAnswer);
+        $('#result').text(str);
+        $('#correct').text(this.correctAnswer);
+    }
+
+    Quiz.prototype.displayFinalResult = function () {
+        $('.result-box').hide();
+        $('.final-result-box').show();
+        $('#total-correct').text(this.correctGuesses);
+        $('#total-incorrect').text(this.incorrectGuesses);
+        $('#total-skipped').text(this.skippedGuesses);
     }
 
     Quiz.prototype.countDown = function () {
         this.timeLeft--;
         $('#timer').text(this.timeLeft);
+    }
+
+    Quiz.prototype.startTimer = function() {
+        intervalID = setInterval(function() {}, 1000);
     }
 
 
@@ -98,94 +114,39 @@ $(document).ready(function () {
     quiz.setQuestion(0);
     quiz.displayQuestion();
 
-    intervalID = setInterval(function(){
-        quiz.countDown();
-        $('.answer')
-
-        if(quiz.timeLeft <= 0) {
+    intervalID = setInterval(function () {
+        quiz.countDown();        
+        if (quiz.timeLeft <= 0) {
             quiz.displayResult("Time's up...")
+            quiz.skippedGuesses++;
         }
     }, 1000);
 
-
-
-    //     function Quiz() {
-    //         this.questionBank = $.extend(true, [], questions);
-    //         this.currentQuestion = this.questionBank[0];
-    //         this.nextQuestion = 1;
-    //         this.allAnswers = [
-    //                 this.currentQuestion.trueAnswer, 
-    //                 this.currentQuestion.decoy1, 
-    //                 this.currentQuestion.decoy2, 
-    //                 this.currentQuestion.decoy3
-    //             ];
-    //         this.timeLeft = 10;
-    //         this.correctAnswer = this.currentQuestion.trueAnswer;
-    //         this.currentGuess = '';
-    //         this.correctGuesses = 0;
-    //         this.incorrectGuesses = 0;
-    //         this.skippedGuesses = 0;
-    //     }
-
-    //     Quiz.prototype.countDown = function() {
-    //         this.timeLeft--;
-    //         $('#timer').text(this.timeLeft);
-    //         if(this.timeLeft <= 0) {
-    //             clearInterval(intervalID);
-    //             this.showResult('Too late...');
-    //             var that = this;
-    //             timeoutID = window.setTimeout(function() {
-    //                 that.showQuestion();
-    //             }, 5000);
-    //         }
-    //     }
-
-    //     Quiz.prototype.askQuest = function() {
-    //         // var that = this;
-    //         // intervalID = setInterval(function() {
-    //         //     that.countDown();
-    //         // }, 1000);
-    //         this.showQuestion();
-    //         var that = this;
-    //         intervalID = setInterval( function() {
-    //             that.timeLeft--;
-    //             $('#timer').text(that.timeLeft);
-    //             if(that.timeLeft <= 0) {
-    //                 clearInterval(intervalID);
-    //                 that.showResult('Too late...');
-    //                 that.currentQuestion
-    //                 timeoutID = window.setTimeout()
-    //             }
-    //         }, 1000);
-    //     }
-
-    //     Quiz.prototype.showQuestion = function() {
-    //         $('.question-box').show();
-    //         $('.timer-box').show();
-    //         $('.result-box').hide();
-    //         $('.question').text(this.currentQuestion.question);
-    //         for(let i = 0; i < this.allAnswers.length; i++){
-    //             var $answer = $('<li>').text(this.allAnswers[i]).attr('id', ('answer-' + i));
-    //             $('.answers').append($answer);
-    //         }
-    //     }
-
-    //     Quiz.prototype.showResult = function(str) {
-    //         $('.question-box').hide();
-    //         $('.timer-box').hide();
-    //         $('.result-box').show();
-    //         $('.result').text(str);
-    //         $('.correct').text(this.correctAnswer);
-    //     }
-
-
-
-
-    //     var quiz = new Quiz;
-
-    //     // quiz.askQuest();
-
-
-    //     console.log(quiz.allAnswers)
+    $('.answers').on('click', '.answer', function () {
+        clearInterval(intervalID);
+        if ($(this).attr('data-is-correct') === 'true') {
+            quiz.displayResult('You got it!');
+            quiz.correctGuesses++;
+            timeoutID = setTimeout(function () {
+                if (quiz.nextIndex === quiz.questionBank.length) {
+                    quiz.displayFinalResult();
+                } else {
+                    quiz.setQuestion(quiz.nextIndex);
+                    quiz.displayQuestion();
+                }
+            }, 5000);
+        } else {
+            quiz.displayResult('Not quite...');
+            quiz.incorrectGuesses++;
+            timeoutID = setTimeout(function () {
+                if (quiz.nextIndex === quiz.questionBank.length) {
+                    quiz.displayFinalResult();
+                } else {
+                    quiz.setQuestion(quiz.nextIndex);
+                    quiz.displayQuestion();
+                }
+            }, 5000);
+        }
+    });
 
 });
