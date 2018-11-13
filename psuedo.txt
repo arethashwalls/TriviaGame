@@ -15,3 +15,13 @@
             -Display timeout
             -If there are no more questions:
                 -Go to summary screen
+
+Global variables:
+    -Questions and answers
+    -Quiz object with:
+        -All questions,
+        -Current question,
+        -Time remaining.
+        -Correct answers
+        -Incorrect answers
+        -Unanswered
