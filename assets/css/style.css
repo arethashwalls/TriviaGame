@@ -110,6 +110,17 @@ button {
     color: #EDEEC0;
 }
 
+/* Footer Styles *******************************************/
+
+footer {
+    background: #433E0E;
+    
+}
+
+footer p, footer a {
+    color: #EDEEC0;
+}
+
 /* Responsive Resizing *************************************/
 
 @media screen and (max-width: 1250px) {

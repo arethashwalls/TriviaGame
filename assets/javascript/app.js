@@ -7,70 +7,80 @@ $(document).ready(function () {
             trueAnswer: 'Cherokee, Japanese, and Vai.',
             decoy1: 'Japanese, Arabic, and Nahuatl.',
             decoy2: 'Cherokee, Cree, and Devanagari.',
-            decoy3: 'Thai, Vai, and Cyrillic.'
+            decoy3: 'Thai, Vai, and Cyrillic.',
+            image: 'assets/images/cherokee-sign.png'
         },
         {
             question: 'Hangeul is:',
             trueAnswer: 'A featural alphabet.',
             decoy1: 'A partial syllabary.',
             decoy2: 'A set of logograms.',
-            decoy3: 'A delicious barbeque dish.'
+            decoy3: 'A delicious barbeque dish.',
+            image: 'assets/images/hangul.jpg'
         },
         {
             question: 'Identify the following sample: ស្វាគមន៍មកកាន់ប្រទេសកម្ពុជា',
             trueAnswer: 'Khmer.',
             decoy1: 'Lao.',
             decoy2: 'Cyrillic.',
-            decoy3: 'Tamil.'
+            decoy3: 'Tamil.',
+            image: 'assets/images/khmer.jpg'
         },
         {
             question: 'The first alphabetic writing system with fully represented vowels was:',
             trueAnswer: 'Greek.',
             decoy1: 'Chinese.',
             decoy2: 'Latin.',
-            decoy3: 'Syriac.'
+            decoy3: 'Syriac.',
+            image: 'assets/images/greek.jpg'
         },
         {
             question: 'Identify the following sample: როგორ გრძნობ თავს დღეს',
             trueAnswer: 'Georgian.',
             decoy1: 'Virginian.',
             decoy2: 'Lao.',
-            decoy3: 'Armenian.'
+            decoy3: 'Armenian.',
+            image: 'assets/images/georgian.jpg'
         },
         {
             question: 'Which of the following scripts is written from left to right?',
             trueAnswer: "Ge'ez.",
             decoy1: 'Arabic.',
             decoy2: 'Hebrew.',
-            decoy3: "N'Ko."
+            decoy3: "N'Ko.",
+            image: 'assets/images/geez.jpg'
         },
         {
             question: 'Identify the following sample: তোমার সাথে দেখা করে ভালো লাগলো',
             trueAnswer: 'Bengali.',
             decoy1: 'Devanagari.',
             decoy2: 'Gujarati.',
-            decoy3: 'Armenian.'
+            decoy3: 'Armenian.',
+            image: 'assets/images/bengali.jpg'
         },
         {
             question: 'Which of the following scripts is NOT constructed?',
             trueAnswer: 'Arabic.',
             decoy1: 'Hangeul.',
             decoy2: 'Tengwar.',
-            decoy3: 'Cherokee.'
+            decoy3: 'Cherokee.',
+            image: 'assets/images/arabic.jpg'
         },
         {
             question: 'Tifinagh is:',
             trueAnswer: 'An abjad.',
             decoy1: 'An abugida.',
             decoy2: 'An alphabet.',
-            decoy3: 'A syllabary.'
+            decoy3: 'A syllabary.',
+            image: 'assets/images/tifinagh.jpg'
         },
         {
             question: 'Symbols such as "&", "6", or "@" are examples of:',
             trueAnswer: 'Logograms.',
             decoy1: 'Phonograms.',
             decoy2: 'Graphics.',
-            decoy3: 'Sonograms.'
+            decoy3: 'Sonograms.',
+            image: 'assets/images/chinese.jpg'
         },
     ];
 
@@ -137,6 +147,7 @@ $(document).ready(function () {
         $('.result-box').show();
         $('#result').text(str);
         $('#correct').text(this.correctAnswer);
+        $('#result-img').attr('src', this.currentQuestion.image)
     }
 
     //This method updates the DOM to show the final result:
@@ -182,7 +193,7 @@ $(document).ready(function () {
                 that.displayQuestion();
                 that.startTimer();
             }
-        }, 1000);//CHANGE BACK
+        }, 5000);
     }
 
     //This method wraps three cooccuring methods together for DRYness.
