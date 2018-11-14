@@ -102,7 +102,6 @@ $(document).ready(function () {
     function Quiz() {
         this.questionBank = randomize($.extend(true, [], questions));
         this.timeLeft = timeLimit;
-        this.currentGuess = '';
         this.correctGuesses = 0;
         this.incorrectGuesses = 0;
         this.skippedGuesses = 0;
