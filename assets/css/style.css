@@ -51,6 +51,10 @@ p, li {
     font-size: 18px;
 }
 
+p {
+    line-height: 2em;
+}
+
 li {
     background: #E1B07E;
     margin: 20px auto;
@@ -78,6 +82,16 @@ li {
 .container hr {
     background-image: linear-gradient(to right, transparent, #433E0E, transparent);
     margin-bottom: 25px;
+}
+
+button {
+    font-family: 'Astloch', cursive;
+    font-size: 2em;
+    font-weight: bold;
+    color: #EDEEC0;
+    background: #433E0E;
+    padding: 10px 20px;
+    border: none;
 }
 
 /* Timer Styles *********************************************/

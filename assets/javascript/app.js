@@ -182,7 +182,7 @@ $(document).ready(function () {
                 that.displayQuestion();
                 that.startTimer();
             }
-        }, 5000);
+        }, 1000);//CHANGE BACK
     }
 
     //This method wraps three cooccuring methods together for DRYness.
