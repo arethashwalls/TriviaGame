@@ -218,7 +218,7 @@ $(document).ready(function () {
             quiz.displayResult('You got it!');
             quiz.correctGuesses++;
             quiz.toNext();
-            //If it's not:
+         //If it's not:
         } else {
             //Tell the user, increment incorrectGuesses, and move on.
             quiz.displayResult('Not quite...');

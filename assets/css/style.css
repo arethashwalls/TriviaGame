@@ -64,13 +64,23 @@ li {
     box-shadow: 0 10px 6px -8px #433E0E;
 }
 
+li:hover {
+    background: #cf8030;
+    transition: all 0.5s;
+}
+
+li:active {
+    background: #a56627;
+    transition: all 0.5s;
+}
+
 .container, .timer-box {
     margin: 30px auto;
     box-shadow: 0 10px 6px -8px #433E0E;
 }
 
 .container {
-    width: 60%;
+    width: 50%;
     background-color: #EDEEC0;
 }
 
