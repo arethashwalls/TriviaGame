@@ -1,5 +1,102 @@
+/* Global Styles ***************************************/
 
+body {
+    background: #E1B07E;
+    background-image: url('../images/marbeling.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+}
 
+/* Header Styles **************************************/
+
+header {
+    background: #433E0E;
+    
+    height: 20%;
+    padding: 30px 0;
+}
+
+h1 {
+    font-family: 'Astloch', cursive;
+    font-size: 5em; 
+    text-align: center;
+    color: #EDEEC0;
+}
+
+hr {
+    width: 70%;
+    border: 0;
+    height: 2px;
+    margin: -0.5em auto 0 auto;
+    background-image: linear-gradient(to right, transparent, #EDEEC0, transparent);
+}
+
+/* Body Styles ****************************************/
+
+h2 {
+    font-size: 2em;
+    color:  #433E0E;
+    font-style: italic;
+    margin-bottom: 25px;
+    line-height: 1.5em;
+}
+
+h2, p, li {
+    font-family: 'Gill Sans','Gill Sans MT','Calibri',sans-serif; 
+}
+
+p, li {
+    color: #482728;
+    font-size: 18px;
+}
+
+li {
+    background: #E1B07E;
+    margin: 20px auto;
+    padding: 10px 0;
+    width: 60%;
+    text-align: center;
+    box-shadow: 0 10px 6px -8px #433E0E;
+}
+
+.container, .timer-box {
+    
+    margin: 30px auto;
+    box-shadow: 0 10px 6px -8px #433E0E;
+}
+
+.container {
+    width: 60%;
+    background-color: #EDEEC0;
+}
+
+.question-box, .result-box, .final-result-box {
+    padding: 20px 30px;
+}
+
+.container hr {
+    background-image: linear-gradient(to right, transparent, #433E0E, transparent);
+    margin-bottom: 25px;
+}
+
+/* Timer Styles *********************************************/
+
+.timer-box {
+    width: 5%;
+    text-align: center;
+    padding: 20px 0;
+    background: #433E0E;
+}
+
+#timer {
+    font-family: 'Astloch', cursive;
+    font-size: 2em;
+    font-weight: bold;
+    color: #EDEEC0;
+}
+
+/* Utility Styles ******************************************/
 
 .hidden {
     display: none;

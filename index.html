@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Astloch" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
@@ -14,21 +15,28 @@
 </head>
 
 <body>
-    <h1>Main Title</h1>
-
+    <header>
+        <hr />
+        
+        <h1>Worldly Written Words</h1>
+        
+        <hr />
+    </header>
     <div class="container">
         <section class="question-box">
             <h2 class="question">Question</h2>
-
+            <hr />
             <ul class="answers"></ul>
         </section>
         <section class="result-box hidden">
             <h2 id="result">Result</h2>
+            <hr />
             <p>The correct answer is: <span id="correct">Correct answer</span></p>
             <img src="" alt="" />
         </section>
         <section class="final-result-box hidden">
             <h2>That's it!</h2>
+            <hr />
             <p>Correct answers: <span id="total-correct">0</span></p>
             <p>Incorrect answers: <span id="total-incorrect">0</span></p>
             <p>Unanswered: <span id="total-skipped">0</span></p>

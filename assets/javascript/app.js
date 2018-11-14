@@ -90,7 +90,7 @@ $(document).ready(function () {
 
     //This constructor defines the Quiz prototype:
     function Quiz() {
-        this.questionBank = $.extend(true, [], questions);
+        this.questionBank = randomize($.extend(true, [], questions));
         this.timeLeft = timeLimit;
         this.currentGuess = '';
         this.correctGuesses = 0;
