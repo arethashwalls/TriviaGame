@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     //Global variables:
     var intervalID, timeoutID;
-    var timeLimit = 10;
+    var timeLimit = 30;
 
     //This helper function takes an array and returns a new array with the same contents in a randomized order:
     function randomize(arr) {
