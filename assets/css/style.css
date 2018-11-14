@@ -96,6 +96,23 @@ li {
     color: #EDEEC0;
 }
 
+/* Responsive Resizing *************************************/
+
+@media screen and (max-width: 1250px) {
+    .container {
+        width: 70%;
+    }
+    .timer-box {
+        width: 10%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .timer-box {
+        width: 15%;
+    }
+}
+
 /* Utility Styles ******************************************/
 
 .hidden {
