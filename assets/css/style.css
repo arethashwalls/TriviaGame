@@ -97,15 +97,15 @@ button {
 /* Timer Styles *********************************************/
 
 .timer-box {
-    width: 5%;
+    width: 7%;
     text-align: center;
-    padding: 20px 0;
+    
     background: #433E0E;
 }
 
 #timer {
     font-family: 'Astloch', cursive;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
     color: #EDEEC0;
 }
