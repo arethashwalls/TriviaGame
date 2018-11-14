@@ -65,7 +65,6 @@ li {
 }
 
 .container, .timer-box {
-    
     margin: 30px auto;
     box-shadow: 0 10px 6px -8px #433E0E;
 }
@@ -82,6 +81,10 @@ li {
 .container hr {
     background-image: linear-gradient(to right, transparent, #433E0E, transparent);
     margin-bottom: 25px;
+}
+
+img {
+    margin-bottom: 20px;
 }
 
 button {
@@ -114,7 +117,9 @@ button {
 
 footer {
     background: #433E0E;
-    
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 footer p, footer a {
