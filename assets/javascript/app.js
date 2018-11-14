@@ -110,7 +110,6 @@ $(document).ready(function () {
     //This method sets the current question and answers based on the index provided:
     Quiz.prototype.setQuestion = function (index) {
         this.currentQuestion = this.questionBank[index];
-        console.log(this.currentQuestion)
         this.nextIndex = index + 1;
         this.allAnswers = randomize([
             this.currentQuestion.trueAnswer,
@@ -118,7 +117,6 @@ $(document).ready(function () {
             this.currentQuestion.decoy2,
             this.currentQuestion.decoy3
         ]);
-        this.correctAnswer = this.currentQuestion.trueAnswer;
     }
 
     //This method updates the DOM with the current question:
@@ -132,7 +130,7 @@ $(document).ready(function () {
         for (let i = 0; i < this.allAnswers.length; i++) {
             // var $answer = $('<li>').text(this.allAnswers[i]).attr('id', ('answer-' + i));
             var $answer = $('<li>').text(this.allAnswers[i]).attr({
-                'data-is-correct': (this.allAnswers[i] === this.correctAnswer ? true : false),
+                'data-is-correct': (this.allAnswers[i] === this.currentQuestion.trueAnswer ? true : false),
                 'class': 'answer'
             });
             $('.answers').append($answer);
@@ -145,7 +143,7 @@ $(document).ready(function () {
         $('.timer-box').hide();
         $('.result-box').show();
         $('#result').text(str);
-        $('#correct').text(this.correctAnswer);
+        $('#correct').text(this.currentQuestion.trueAnswer);
         $('#result-img').attr('src', this.currentQuestion.image)
     }
 
@@ -234,5 +232,4 @@ $(document).ready(function () {
         quiz = new Quiz;
         quiz.newGame();
     });
-
 });
