@@ -43,6 +43,6 @@ If `data-is-correct` is false, a failure message is displayed, *Quiz.incorrectGu
 
 The restart button is available in the final result stage. On clicking the restart button (231-233), the quiz is reset and the game starts over.
 
-##TODO
+## TODO
 
 * Fix footer
