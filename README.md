@@ -42,3 +42,7 @@ If the answer's `data-is-correct` attribute is `true`, the answer is correct. A 
 If `data-is-correct` is false, a failure message is displayed, *Quiz.incorrectGuesses* is incremented, and the player moves to the next question (222-226).
 
 The restart button is available in the final result stage. On clicking the restart button (231-233), the quiz is reset and the game starts over.
+
+##TODO
+
+* Fix footer
