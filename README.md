@@ -46,3 +46,4 @@ The restart button is available in the final result stage. On clicking the resta
 ## TODO
 
 * ~~Fix footer~~
+* Footer *still* isn't quite right...
